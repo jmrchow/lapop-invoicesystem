@@ -21,21 +21,25 @@ import javafx.scene.control.TextField;
 
 @SuppressWarnings("restriction")
 public class StartUI extends Application {
+	
+	private static final String USERNAME = "";
+	private static final String PASSWORD = "";
+	
 	public static void main(String[] args) {
 		launch(args);
-		try {
-			InvoiceSystemController.createInvoice();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			InvoiceSystemController.createInvoice();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 	@Override
 	public void start(Stage primaryStage){
-		loginUI(primaryStage);
+		initLoginUI(primaryStage);
 	}
 	
-	private void loginUI(final Stage primaryStage) {
+	private void initLoginUI(final Stage primaryStage) {
 		primaryStage.setTitle("JavaFX Welcome");
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
@@ -50,13 +54,13 @@ public class StartUI extends Application {
 		Label userName = new Label("User Name:");
 		grid.add(userName, 0, 1);
 		
-		TextField userTextField = new TextField();
+		final TextField userTextField = new TextField();
 		grid.add(userTextField, 1, 1);
 		
 		Label pw = new Label("Password: ");
 		grid.add(pw, 0, 2);
 		
-		PasswordField pwBox = new PasswordField();
+		final PasswordField pwBox = new PasswordField();
 		grid.add(pwBox, 1, 2);
 		
 		Button btn = new Button("Sign in");
@@ -79,8 +83,20 @@ public class StartUI extends Application {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				primaryStage.close();
-				invoiceUI();
+
+				if (userTextField.getText().contentEquals(USERNAME) && pwBox.getText().equals(PASSWORD)) {
+					primaryStage.close();
+					try {
+						InvoiceUI.initInvoiceUI();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				else actiontarget.setText("Invalid username or password");
+		
+		
+
 			}
 		});
 			
@@ -98,9 +114,4 @@ public class StartUI extends Application {
 		
 	}
 	
-	public void invoiceUI() {
-		Stage invoiceStage = new Stage();
-		invoiceStage.setTitle("Invoice");
-		invoiceStage.show();
-	}
 }
