@@ -6,57 +6,37 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane fx:controller="com.mycompany.view.InvoiceUI" 
+<GridPane fx:controller="com.mycompany.view.InvoiceUI" fx:id="gridpane0"
     xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
 <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
 
 <Label text="Date" 
         GridPane.columnIndex="0" GridPane.rowIndex="0"
         GridPane.columnSpan="1"/>
-    <TextField fx:id="date0"
-    	GridPane.columnIndex="0" GridPane.rowIndex="1"
-        GridPane.columnSpan="1"/>
  
     <Label text="Item"
         GridPane.columnIndex="1" GridPane.rowIndex="0"
-        GridPane.columnSpan="1"/>
-     <TextField fx:id="date1"
-     	GridPane.columnIndex="1" GridPane.rowIndex="1"
         GridPane.columnSpan="1"/>
         
     <Label text="Description"
         GridPane.columnIndex="2" GridPane.rowIndex="0"
         GridPane.columnSpan="1"/>
-    <TextField
-    	GridPane.columnIndex="2" GridPane.rowIndex="1"
-        GridPane.columnSpan="1"/>
         
     <Label text="Quantity"
         GridPane.columnIndex="3" GridPane.rowIndex="0"
-        GridPane.columnSpan="1"/>
-    <TextField
-    	GridPane.columnIndex="3" GridPane.rowIndex="1"
         GridPane.columnSpan="1"/>
     
     <Label text="Unit Price"
     	GridPane.columnIndex="4" GridPane.rowIndex="0"
     	GridPane.columnSpan="1"/>
-    <TextField
-    	GridPane.columnIndex="4" GridPane.rowIndex="1"
-    	GridPane.columnSpan="1"/>
     
     <Label text ="Unit Discount"
     	GridPane.columnIndex="5" GridPane.rowIndex="0"
     	GridPane.columnSpan="1"/>
-    <TextField
-    	GridPane.columnIndex="5" GridPane.rowIndex="1"
-    	GridPane.columnSpan="1"/>
     	
-    <Label text ="Total"
-    	GridPane.columnIndex="6" GridPane.rowIndex="0"
-    	GridPane.columnSpan="1"/>
-    <TextField
-    	GridPane.columnIndex="6" GridPane.rowIndex="1"
+    	
+    <Button text="Submit" fx:id="btn" onAction="#handleSubmitButtonAction"
+    	GridPane.columnIndex="5" GridPane.rowIndex="7"
     	GridPane.columnSpan="1"/>
     	    
 </GridPane>

@@ -84,10 +84,11 @@ public class StartUI extends Application {
 					e1.printStackTrace();
 				}
 
-				if (userTextField.getText().contentEquals(USERNAME) && pwBox.getText().equals(PASSWORD)) {
+				if (userTextField.getText().equals(USERNAME) && pwBox.getText().equals(PASSWORD)) {
 					primaryStage.close();
 					try {
-						InvoiceUI.initInvoiceUI();
+						InvoiceUI InvoiceUIController = new InvoiceUI();
+						InvoiceUIController.initInvoiceUI();
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
