@@ -1,6 +1,10 @@
 package com.mycompany.view;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedList;
+
+import com.mycompany.controller.InvoiceSystemController;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,15 +20,27 @@ import javafx.stage.Stage;
 
 public class InvoiceUI {
 	
-	private static final int NUMBER_OF_LINES = 6;
+	public static final int NUMBER_OF_LINES = 6;
 	
 	@FXML
 	private GridPane gridpane0;
 	@FXML
 	private Button btn;
     @FXML protected void handleSubmitButtonAction(ActionEvent event) {
+    	try {
+			InvoiceSystemController.createInvoice(getInvoiceData());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
     }
 
+	TextField[] itemFields;
+	TextField[] descriptionFields;
+	TextField[] quantityFields;
+	TextField[] priceFields;
+	TextField[] discountFields;
 	
 	
 	public void initInvoiceUI() throws Exception {
@@ -49,15 +65,16 @@ public class InvoiceUI {
 
 	}
 	
-	public void initialize() {
+	@FXML
+	private void initialize() {
 		TextField dateField = new TextField();
 		gridpane0.add(dateField, 0, 1);
 
-		TextField[] itemFields = new TextField[NUMBER_OF_LINES];
-		TextField[] descriptionFields = new TextField[NUMBER_OF_LINES];
-		TextField[] quantityFields = new TextField[NUMBER_OF_LINES];
-		TextField[] priceFields = new TextField[NUMBER_OF_LINES];
-		TextField[] discountFields = new TextField[NUMBER_OF_LINES];
+		itemFields = new TextField[NUMBER_OF_LINES];
+		descriptionFields = new TextField[NUMBER_OF_LINES];
+		quantityFields = new TextField[NUMBER_OF_LINES];
+		priceFields = new TextField[NUMBER_OF_LINES];
+		discountFields = new TextField[NUMBER_OF_LINES];
 
 		for (int i = 0; i < NUMBER_OF_LINES; i++) {
 			itemFields[i] = new TextField();
@@ -75,23 +92,15 @@ public class InvoiceUI {
 		}
 	}
 
-//	public static InvoiceDTO getInvoiceData() { // TODO: Make InvoiceDTO class
-//		
-//		LinkedList<String> itemsList =  new LinkedList<String>();
-//		LinkedList<String> descriptionsList =  new LinkedList<String>();
-//		LinkedList<Integer> quantityList =  new LinkedList<Integer>();
-//		LinkedList<Integer> priceList =  new LinkedList<Integer>(); 
-//		LinkedList<Integer> discountList =  new LinkedList<Integer>();
-//		
-//
-//		for (int i = 0; i < 6; i++) {
-//			if (!"da")
-//		}
-//		
-//		InvoiceDTO specificInvoiceDTO = new InvoiceDTO();
-//		InvoiceDTO.invoiceDate = date;
-//		InvoiceDTO.invoiceItems = itemsList;
-//		InvoiceDTO.invoiceDescriptions = descriptionsList;
-//		
-//	}
+	public InvoiceDTO getInvoiceData() {
+		InvoiceDTO specificInvoiceDTO = new InvoiceDTO();
+		for (int i = 0; i < NUMBER_OF_LINES; i++) {
+			if (!itemFields[i].getText().equals("")) {
+				specificInvoiceDTO.addBundle(i, itemFields[i].getText(), descriptionFields[i].getText(), Integer.parseInt(quantityFields[i].getText())
+						, Integer.parseInt(priceFields[i].getText()), Integer.parseInt(discountFields[i].getText()));
+			}
+		}
+		return specificInvoiceDTO;
+
+	}
 }
